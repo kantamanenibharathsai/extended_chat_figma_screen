@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.search-icon {
+  color: black;
+  font-size: 17px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
