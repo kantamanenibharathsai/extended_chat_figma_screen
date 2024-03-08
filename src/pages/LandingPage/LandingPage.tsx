@@ -102,6 +102,7 @@ const LandingPage = () => {
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
+
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -130,7 +131,6 @@ const LandingPage = () => {
             timestamp: new Date(),
             imagePath: imageFile
         }
-
         requiredChat[0].messages.push(newMessageObj);
         setMessagesList((prevMsgs) => [...prevMsgs, newMessageObj]);
         setUserEnteredMsg("")
@@ -297,7 +297,7 @@ const LandingPage = () => {
                                     </Box>
                                     {imageFile && (
                                         <Box sx={landingPageStyles.circleWhiteSend}>
-                                            <IconButton sx={landingPageStyles.sendIconButton} disableFocusRipple disableRipple disableTouchRipple onClick={onClickSendIconImageButtonHandler} disabled= {imageFile === ""}>
+                                            <IconButton sx={landingPageStyles.sendIconButton} disableFocusRipple disableRipple disableTouchRipple onClick={onClickSendIconImageButtonHandler} disabled={imageFile === ""}>
                                                 <SendOutlinedIcon sx={landingPageStyles.searchIcon} />
                                             </IconButton>
                                         </Box>)}

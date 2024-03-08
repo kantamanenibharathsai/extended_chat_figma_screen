@@ -8,7 +8,7 @@ const landingPageStyles = {
   childContainer: {
     width: "100%",
     display: { xs: "flex", lg: "flex" },
-    flexDirection: {xs: "column", lg: "row"},
+    flexDirection: { xs: "column", lg: "row" },
     justifyContent: "flex-start",
     background: "#F7F8FC",
     height: "100%",
@@ -28,7 +28,6 @@ const landingPageStyles = {
     alignItems: "center",
     gap: "35px",
     width: "88%",
-    // border: "3px solid green",
     mt: "30px",
   },
 
@@ -452,9 +451,9 @@ const landingPageStyles = {
     background: "#E5ECF6",
   },
 
-  sendIconButton:{
-    color: "#02346B"
-  }
+  sendIconButton: {
+    color: "#02346B",
+  },
 };
 
 export default landingPageStyles;
