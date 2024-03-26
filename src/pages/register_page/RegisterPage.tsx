@@ -54,7 +54,7 @@ const RegisterPage = () => {
     }
 
     const handleStateChange = (event: SelectChangeEvent) => {
-        setStateName(event?.target.value)
+        setStateName(event.target.value)
     }
 
     const loginBtnHandler = () => {

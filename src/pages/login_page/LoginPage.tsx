@@ -5,18 +5,28 @@ import loginImage from "../../assets/loginImage.png"
 import { ChangeEvent, useState } from "react"
 import countryPhoneNumCodes from "../../typescript/LoginPageData"
 import { useNavigate } from "react-router-dom"
-
-
+import OtpInput from 'react-otp-input';
+import { CgSpinner } from "react-icons/cg";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { auth } from "./../../firebase/Firebase.Config";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 interface IState {
     phoneNumber: string,
-    countryPhoneNumCode: string
+    countryPhoneNumCode: string,
+    otp: string
 }
 
 
 const LoginPage = () => {
     const [phoneNumber, setPhoneNumber] = useState<IState["phoneNumber"]>("");
     const [countryPhoneNumCode, setCountryPhoneNumCode] = useState<IState["countryPhoneNumCode"]>("91")
+    const [otp, setOtp] = useState<IState["otp"]>('');
+    const [ph, setPh] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [showOTP, setShowOTP] = useState(false);
+    const [user, setUser] = useState(null); 
     const navigate = useNavigate()
 
     const handlePhoneNumChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +44,63 @@ const LoginPage = () => {
     const registerBtnHandler = () => {
         navigate("/register")
     }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setOtp(event.target.value)
+    }
+
+  
+    // function onCaptchVerify() {
+    //   if (!window.recaptchaVerifier) {
+    //     window.recaptchaVerifier = new RecaptchaVerifier(
+    //       "recaptcha-container",
+    //       {
+    //         size: "invisible",
+    //         callback: (response) => {
+    //           onSignup();
+    //         },
+    //         "expired-callback": () => {},
+    //       },
+    //       auth
+    //     );
+    //   }
+    // }
+  
+    // function onSignup() {
+    //   setLoading(true);
+    //   onCaptchVerify();
+  
+    //   const appVerifier = window.recaptchaVerifier;
+  
+    //   const formatPh = "+" + ph;
+  
+    //   signInWithPhoneNumber(auth, formatPh, appVerifier)
+    //     .then((confirmationResult) => {
+    //       window.confirmationResult = confirmationResult;
+    //       setLoading(false);
+    //       setShowOTP(true);
+    //       toast.success("OTP sended successfully!");
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       setLoading(false);
+    //     });
+    // }
+  
+    // function onOTPVerify() {
+    //   setLoading(true);
+    //   window.confirmationResult
+    //     .confirm(otp)
+    //     .then(async (res) => {
+    //       console.log(res);
+    //       setUser(res.user);
+    //       setLoading(false);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       setLoading(false);
+    //     });
+    // }
 
     return (
         <Box sx={loginPageStyles.mainContainer}>
@@ -89,14 +156,34 @@ const LoginPage = () => {
                                 <Typography sx={loginPageStyles.bottomHeadingText}>OTP verification</Typography>
                                 <Box component="form" sx={loginPageStyles.otpFormContainer}>
                                     <Box sx={loginPageStyles.otpNumsContainer}>
-                                        <TextField sx={loginPageStyles.otpNumTextFieldStyle} />
-                                        {/* <Box sx={loginPageStyles.otpNumBox}>1</Box>
-                                        <Box sx={loginPageStyles.otpNumBox}>1</Box>
-                                        <Box sx={loginPageStyles.otpNumBox}>1</Box> */}
+                                        <OtpInput
+                                            value={otp}
+                                            onChange={setOtp}
+                                            numInputs={4}
+                                            renderInput={(props) => <input {...props} />}
+                                            renderSeparator={<span style={{ width: "8px" }}></span>}
+                                            inputType={"tel"}
+                                            shouldAutoFocus={true}
+                                            inputStyle={{
+                                                border: "1px solid black",
+                                                borderRadius: "8px",
+                                                width: "54px",
+                                                height: "54px",
+                                                fontSize: "12px",
+                                                color: "#000",
+                                                fontWeight: "400",
+                                                caretColor: "black"
+                                            }}
+                                        />
                                     </Box>
                                 </Box>
                                 <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                                    <Button disableTouchRipple disableFocusRipple disableRipple sx={loginPageStyles.sendVerifyBtn}>VERIFY</Button>
+
+                                    {/* <Button disableTouchRipple disableFocusRipple disableRipple sx={loginPageStyles.sendVerifyBtn}>
+                                        <CgSpinner size={20} className="mt-1 animate-spin"/>
+                                        VERIFY</Button>
+                                         */}
+                                         <button className="btn btn-danger">verify</button>
                                 </Stack>
                             </Stack>
                         </Box>

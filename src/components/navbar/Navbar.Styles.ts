@@ -35,7 +35,7 @@ const navbarStyles = {
   },
 
   leftContainer: {
-    position: "absolute",
+    position: "fixed",
     left: 0,
     top: 0,
     background: "#054081",
@@ -43,8 +43,35 @@ const navbarStyles = {
     flexDirection: "column",
     alignItems: "center",
     height: "100%",
-    transition: "2s ease width",
-    zIndex: 1
+    zIndex: 1,
+    width: "300px",
+    overflowX: "hidden",
+    transition: "width 1.5s ease",
+  },
+
+  leftCloseContainer: {
+    position: "fixed",
+    left: 0,
+    top: 0,
+    background: "#054081",
+    display: { xs: "flex", lg: "none" },
+    flexDirection: "column",
+    alignItems: "center",
+    height: "100%",
+    zIndex: 1,
+    width: 0,
+    transition: "width 1.5s ease",
+    overflowX: "hidden",
+  },
+
+  closeIconButton: {
+    position: "absolute",
+    left: "30px",
+    top: "15px",
+  },
+
+  closeIcon: {
+    color: "#fff",
   },
 
   leftChildContainer: {
@@ -54,6 +81,8 @@ const navbarStyles = {
     gap: "35px",
     width: "88%",
     mt: "30px",
+    // transition: "4s",
+    // border: "2px solid red",
   },
 
   extendedLogo: {
@@ -65,6 +94,7 @@ const navbarStyles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    // border: "2px solid red",
   },
 
   userProfileDrawerImage: {
@@ -91,6 +121,7 @@ const navbarStyles = {
     gap: "50px",
     width: "80%",
     alignSelf: "center",
+    // border: "2px solid red",
   },
 
   listItem: {
